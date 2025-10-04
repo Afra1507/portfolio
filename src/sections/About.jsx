@@ -19,7 +19,7 @@ export default function About() {
                 University of Sri Jayewardenepura (2023 – Present)
               </li>
               <li>
-                <strong>Internship:</strong> QTD — Software Engineering Intern
+                <strong>Internship:</strong> Quantum Tunnel Design — Part time Software Engineering Intern
                 (Oct 2025 – Present)
               </li>
             </ul>

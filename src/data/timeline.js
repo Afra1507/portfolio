@@ -2,10 +2,10 @@ export const timeline = [
   {
     id: "t-intern-2025",
     year: "Oct 2025 – Present",
-    title: "Software Engineering Intern — QTD",
+    title: "Software Engineering Intern — Quantum Tunnel Design",
     location: "Colombo, Sri Lanka",
     description:
-      "Working across the frontend stack (React). Building accessible, performant UI components, polishing UX micro-interactions, and contributing to code quality and documentation as a part time intern.",
+      "Just started as a part time Software Engineering Intern. Getting familiar with the codebase, tools, and workflow. Beginning to work on frontend tasks using React and learning how the team builds and maintains UI components.",
     skills: ["React", "JavaScript", "UI/UX", "Documentation", "Git"],
   },
   {
