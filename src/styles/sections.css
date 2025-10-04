@@ -1,0 +1,96 @@
+/* === Hero === */
+.hero {
+  background: linear-gradient(
+    180deg,
+    rgba(253, 240, 213, 0.88),
+    rgba(253, 240, 213, 0)
+  );
+}
+.dark .hero {
+  background: linear-gradient(180deg, rgba(0, 48, 73, 0.5), rgba(0, 48, 73, 0));
+}
+.hero-title {
+  font-family: "Montserrat";
+  font-weight: 800;
+  letter-spacing: -0.6px;
+}
+.hero-title span {
+  color: var(--fire-brick);
+}
+.hero .lead {
+  font-size: var(--fs-lead);
+}
+
+/* === Section headings === */
+.section-title {
+  font-family: "Montserrat";
+  font-weight: 800;
+  border-left: 6px solid var(--barn-red);
+  padding-left: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+/* === Timeline === */
+.timeline {
+  position: relative;
+  padding-left: 30px;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(
+    180deg,
+    var(--air-superiority-blue),
+    var(--fire-brick)
+  );
+  border-radius: 2px;
+  opacity: 0.9;
+}
+.timeline-item {
+  position: relative;
+  margin: 0 0 26px 0;
+  padding-left: 14px;
+}
+.timeline-dot {
+  position: absolute;
+  left: -4px;
+  top: 0.25rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--fire-brick);
+  box-shadow: 0 0 0 4px rgba(193, 18, 31, 0.18);
+}
+.timeline-time {
+  font-family: "Montserrat";
+  font-size: clamp(1rem, 0.96rem + 0.3vw, 1.1rem);
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  margin-bottom: 0.15rem;
+}
+.timeline-title {
+  font-family: "Montserrat";
+  font-size: clamp(1.1rem, 1.02rem + 0.5vw, 1.35rem);
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+.timeline-body {
+  font-size: clamp(1rem, 0.98rem + 0.2vw, 1.0625rem);
+  color: var(--muted);
+}
+/* Dark-mode headline polish for hero and timeline */
+.dark .hero-title {
+  color: #f6f9fc;
+}
+.dark .timeline::before {
+  /* Slightly brighter gradient rail so it doesn't sink into the background */
+  background: linear-gradient(
+    180deg,
+    rgba(102, 155, 188, 0.95),
+    rgba(193, 18, 31, 0.95)
+  );
+}
