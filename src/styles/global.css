@@ -618,39 +618,37 @@ i {
 .contact-card .form-control:focus {
   border-color: var(--air-superiority-blue);
   box-shadow: 0 0 0 0.2rem rgba(102, 155, 188, 0.25);
-  background: rgba(255, 255, 255, 0.9);  /* light on light mode */
+  background: rgba(255, 255, 255, 0.9); /* light on light mode */
   color: #0e1116;
 }
 
 .dark .contact-card .form-control:focus {
-  background: rgba(255, 255, 255, 0.1);  /* slightly brighter than base dark */
+  background: rgba(255, 255, 255, 0.1); /* slightly brighter than base dark */
   color: #eef3f9;
 }
-
 
 /* Submit row spacing */
 .contact-actions {
   margin-top: 0.25rem;
 }
 
-
 /* Chips with icons */
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .chip {
   display: inline-flex;
   align-items: center;
-  gap: .5rem;
-  padding: .4rem .7rem;
+  gap: 0.5rem;
+  padding: 0.4rem 0.7rem;
   border-radius: 999px;
-  background: var(--surface, rgba(255,255,255,.6));
-  border: 1px solid var(--glass-border, rgba(255,255,255,.35));
+  background: var(--surface, rgba(255, 255, 255, 0.6));
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.35));
   backdrop-filter: blur(6px);
-  font-size: .9rem;
+  font-size: 0.9rem;
   line-height: 1;
   white-space: nowrap;
 }
@@ -729,7 +727,7 @@ i {
 }
 /* --- Expandable (details/summary) styling --- */
 .tl-details {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   border: 1px solid var(--glass-border);
   border-radius: 12px;
   background: var(--surface);
@@ -740,18 +738,20 @@ i {
 .tl-summary {
   list-style: none;
   cursor: pointer;
-  padding: .6rem .8rem;
+  padding: 0.6rem 0.8rem;
   display: flex;
   align-items: center;
-  gap: .45rem;
+  gap: 0.45rem;
   font-weight: 600;
   color: var(--air-superiority-blue);
   user-select: none;
 }
-.tl-summary::-webkit-details-marker { display: none; }
+.tl-summary::-webkit-details-marker {
+  display: none;
+}
 
 .tl-summary__chev {
-  transition: transform .2s ease;
+  transition: transform 0.2s ease;
 }
 
 .tl-details[open] .tl-summary__chev {
@@ -759,9 +759,9 @@ i {
 }
 
 .tl-details__content {
-  padding: .2rem .95rem .85rem .95rem;
+  padding: 0.2rem 0.95rem 0.85rem 0.95rem;
   display: grid;
-  gap: .4rem;
+  gap: 0.4rem;
   border-top: 1px solid var(--glass-border);
 }
 
@@ -772,6 +772,150 @@ i {
 
 /* Optional: tighter list styling inside the expandable content */
 .tl-details__content .timeline-section ul {
-  margin: .2rem 0 0 1.1rem;
-  font-size: .92rem;
+  margin: 0.2rem 0 0 1.1rem;
+  font-size: 0.92rem;
 }
+/* Navbar layout tweaks */
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Brand */
+.nav-brand {
+  font-family:
+    "Montserrat",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: var(--text);
+  text-decoration: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 10px;
+}
+
+/* Hamburger */
+.nav-toggle {
+  display: none; /* desktop default */
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  padding: 0.35rem 0.45rem;
+  border-radius: 10px;
+}
+
+/* Navigation list baseline (desktop) */
+.nav-list {
+  display: flex;
+  gap: 0.25rem;
+}
+
+/* MOBILE styles */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 0.5rem;
+  }
+  .navbar-inner {
+    width: min(100%, 640px);
+    justify-content: space-between;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  /* turn links into a slide-down drawer */
+  .nav-list {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: min(94%, 640px);
+    display: grid;
+    gap: 0.25rem;
+    background: var(--surface);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 0.5rem;
+    box-shadow: var(--shadow);
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.18s ease,
+      opacity 0.18s ease;
+  }
+  .nav-list.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* nicer tappable targets */
+  .nav-link {
+    display: block;
+    padding: 0.7rem 0.8rem;
+  }
+
+  /* full-screen click backdrop */
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.25);
+  }
+}
+/* Projects grid */
+.projects-grid {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: 1fr; /* 1 col on phones */
+  align-items: stretch;
+}
+
+@media (min-width: 576px) {
+  /* small phones / phablets */
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 992px) {
+  /* tablets/desktop */
+  .projects-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1400px) {
+  /* large desktop */
+  .projects-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+/* On touch: render overlay as a normal block at the bottom, with no dark veil */
+@media (hover: none) {
+  .project-card .project-overlay {
+    position: static;
+    opacity: 1;
+    pointer-events: auto;
+    background: transparent;
+    padding: .6rem .75rem .85rem;
+    display: flex;
+    justify-content: flex-start;
+    gap: .5rem;
+  }
+  .project-card:hover .card-img { transform: none; } /* avoid zoom jump on tap */
+}
+/* slightly bigger tap area for nav links (already applied on mobile above) */
+.nav-link { min-height: 40px; }
+
+/* make project buttons comfy on touch */
+.project-card .project-overlay .btn { padding: .6rem .9rem; }
