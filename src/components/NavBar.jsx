@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import HomeIcon from "@mui/icons-material/Home";
 
 export default function NavBar() {
   const [hidden, setHidden] = useState(false);
@@ -19,7 +20,7 @@ export default function NavBar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // close menu when a link is clicked or on Escape
+  // close menu on Escape key
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
@@ -37,39 +38,49 @@ export default function NavBar() {
   const closeAndScroll = () => setOpen(false);
 
   return (
-    <div className={`navbar ${hidden ? "navbar--hidden" : "navbar--visible"}`}>
-      <div className="navbar-inner glass card-glass d-flex align-items-center">
-
-
-        {/* Hamburger (shown on mobile) */}
-        <button
-          className="nav-toggle"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          aria-controls="primary-navigation"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <CloseIcon /> : <MenuIcon />}
-        </button>
-
-        {/* Links */}
-        <ul
-          id="primary-navigation"
-          className={`nav nav-list m-0 ${open ? "is-open" : ""}`}
-          onClick={closeAndScroll}
-        >
-          {links.map((l) => (
-            <li className="nav-item" key={l.id}>
-              <a className="nav-link" href={`#${l.id}`}>
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
+    <>
       {/* Backdrop for mobile drawer */}
-      {open && <div className="nav-backdrop" onClick={() => setOpen(false)} />}
-    </div>
+      <div
+        className={`nav-backdrop ${open ? "active" : ""}`}
+        onClick={() => setOpen(false)}
+      ></div>
+
+      <div
+        className={`navbar ${hidden ? "navbar--hidden" : "navbar--visible"}`}
+      >
+        <div className="navbar-inner glass card-glass d-flex align-items-center justify-content-between">
+          {/* Home */}
+          <a href="#" className="nav-brand">
+            <HomeIcon fontSize="large" />
+          </a>
+
+          {/* Hamburger (mobile only) */}
+          <button
+            className="nav-toggle"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="primary-navigation"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <CloseIcon /> : <MenuIcon />}
+          </button>
+
+          {/* Navigation Links */}
+          <ul
+            id="primary-navigation"
+            className={`nav nav-list ${open ? "is-open" : ""}`}
+            onClick={closeAndScroll}
+          >
+            {links.map((l) => (
+              <li className="nav-item" key={l.id}>
+                <a className="nav-link" href={`#${l.id}`}>
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </>
   );
 }

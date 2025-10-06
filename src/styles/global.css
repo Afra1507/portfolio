@@ -191,7 +191,29 @@ i {
   pointer-events: auto;
   border-radius: 18px;
   padding: 0.45rem 0.6rem;
+  background: var(--surface);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow);
 }
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: rgba(255, 255, 255, 0.12); /* frosted look */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.nav-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .navbar--hidden {
   transform: translateY(-120%);
   opacity: 0;
@@ -819,59 +841,89 @@ i {
 /* MOBILE styles */
 @media (max-width: 768px) {
   .navbar {
-    padding: 0 0.5rem;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
   }
+  
   .navbar-inner {
-    width: min(100%, 640px);
+    width: 100%;
+    max-width: 640px;
     justify-content: space-between;
+    display: flex;
+    align-items: center;
+    /* Ensure glass morphism is strong enough */
+    background: var(--surface);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
   }
 
   .nav-toggle {
     display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
   }
 
-  /* turn links into a slide-down drawer */
+  /* Fix the dropdown glass morphism */
   .nav-list {
     position: absolute;
-    top: calc(100% + 10px);
+    top: calc(100% + 8px); /* Space between navbar and dropdown */
     left: 0;
     right: 0;
     margin: 0 auto;
-    width: min(94%, 640px);
+    width: calc(100% - 2rem);
+    max-width: 640px;
     display: grid;
     gap: 0.25rem;
+    /* Strong glass effect for readability */
     background: var(--surface);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: 14px;
-    padding: 0.5rem;
+    padding: 0.75rem;
     box-shadow: var(--shadow);
-    transform: translateY(-8px);
+    transform: translateY(-10px);
     opacity: 0;
     pointer-events: none;
-    transition:
-      transform 0.18s ease,
-      opacity 0.18s ease;
+    transition: all 0.25s ease;
+    z-index: 1101;
   }
+  
   .nav-list.is-open {
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
   }
 
-  /* nicer tappable targets */
+  /* Better tap targets with strong background contrast */
   .nav-link {
     display: block;
-    padding: 0.7rem 0.8rem;
+    padding: 0.8rem 1rem;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    transition: all 0.2s ease;
   }
 
-  /* full-screen click backdrop */
+  .nav-link:hover,
+  .nav-link:focus {
+    background: rgba(102, 155, 188, 0.25);
+    transform: none; /* Remove transform on mobile */
+  }
+
+  /* Enhanced backdrop for better text separation */
   .nav-backdrop {
     position: fixed;
     inset: 0;
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.25);
+    z-index: 1100;
+    background: rgba(0, 0, 0, 0.4);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
   }
 }
 /* Projects grid */
