@@ -1,14 +1,6 @@
 import { timeline } from "../data/timeline";
 import useScrollReveal from "../hooks/useScrollReveal";
-
-// MUI icons (install @mui/icons-material if you haven't)
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import PlaceIcon from "@mui/icons-material/Place";
-import ChecklistIcon from "@mui/icons-material/Checklist";
-import SchoolIcon from "@mui/icons-material/School";
-import ScienceIcon from "@mui/icons-material/Science";
-import InsightsIcon from "@mui/icons-material/Insights";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import SectionHeading from "../components/SectionHeading";
 
 export default function Timeline() {
   useScrollReveal();
@@ -16,122 +8,70 @@ export default function Timeline() {
   return (
     <section id="timeline" className="section">
       <div className="container">
-        <h2 className="section-title" data-reveal>
-          My Journey
-        </h2>
+        <SectionHeading
+          title="Journey"
+          lead="Fourth-year computer science studies, a previous frontend internship, and a Dev & DevOps internship at Virtusa."
+        />
 
-        <div className="timeline">
+        <ol className="timeline">
           {timeline.map((item) => (
-            <article className="timeline-item" key={item.id} data-reveal>
-              <div className="timeline-dot" aria-hidden="true" />
-
-              <header>
-                <div className="timeline-time">
-                  <CalendarMonthIcon
-                    fontSize="small"
-                    style={{ verticalAlign: "-2px", marginRight: 6 }}
-                    aria-hidden="true"
-                  />
+            <li className="timeline-item" key={item.id} data-reveal>
+              <article className="timeline-card">
+                <p className="timeline-time">
                   <time>{item.year}</time>
-                </div>
-
+                </p>
                 <h3 className="timeline-title">{item.title}</h3>
-
                 {item.location && (
-                  <p className="timeline-location">
-                    <PlaceIcon
-                      fontSize="small"
-                      style={{ verticalAlign: "-3px", marginRight: 6 }}
-                      aria-hidden="true"
-                    />
-                    {item.location}
-                  </p>
+                  <p className="timeline-location">{item.location}</p>
                 )}
-              </header>
+                <p className="timeline-body">{item.description}</p>
 
-              <p className="timeline-body">{item.description}</p>
-
-              {/* EXPANDABLE DETAILS: only render if we have extra fields */}
-              {(item.results ||
-                item.stream ||
-                item.subjects ||
-                item.skills) && (
-                <details className="tl-details">
-                  <summary className="tl-summary">
-                    <ExpandMoreIcon className="tl-summary__chev" />
-                    More details
-                  </summary>
-
-                  <div className="tl-details__content">
-                    {item.results && (
-                      <p className="timeline-results">
-                        <ChecklistIcon
-                          fontSize="small"
-                          style={{ verticalAlign: "-3px", marginRight: 6 }}
-                          aria-hidden="true"
-                        />
-                        <strong>Results:</strong> {item.results}
-                      </p>
-                    )}
-
-                    {item.stream && (
-                      <p className="timeline-stream">
-                        <SchoolIcon
-                          fontSize="small"
-                          style={{ verticalAlign: "-3px", marginRight: 6 }}
-                          aria-hidden="true"
-                        />
-                        <strong>Stream:</strong> {item.stream}
-                      </p>
-                    )}
-
-                    {item.subjects && item.subjects.length > 0 && (
-                      <div className="timeline-section">
-                        <h4>
-                          <ScienceIcon
-                            fontSize="small"
-                            style={{
-                              verticalAlign: "-3px",
-                              marginRight: 6,
-                            }}
-                            aria-hidden="true"
-                          />
-                          Core Subjects
-                        </h4>
-                        <ul>
-                          {item.subjects.map((s) => (
-                            <li key={s}>{s}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-
-                    {item.skills && item.skills.length > 0 && (
-                      <div className="timeline-section">
-                        <h4>
-                          <InsightsIcon
-                            fontSize="small"
-                            style={{
-                              verticalAlign: "-3px",
-                              marginRight: 6,
-                            }}
-                            aria-hidden="true"
-                          />
-                          Skills & Knowledge Areas
-                        </h4>
-                        <ul>
-                          {item.skills.map((s) => (
-                            <li key={s}>{s}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                </details>
-              )}
-            </article>
+                {(item.results ||
+                  item.stream ||
+                  item.subjects ||
+                  item.skills) && (
+                  <details className="tl-details">
+                    <summary className="tl-summary">More details</summary>
+                    <div className="tl-details__content">
+                      {item.results && (
+                        <p className="timeline-results">
+                          <strong>Results: </strong>
+                          {item.results}
+                        </p>
+                      )}
+                      {item.stream && (
+                        <p className="timeline-stream">
+                          <strong>Stream: </strong>
+                          {item.stream}
+                        </p>
+                      )}
+                      {item.subjects?.length > 0 && (
+                        <div className="timeline-section">
+                          <h4>Core subjects</h4>
+                          <ul>
+                            {item.subjects.map((subject) => (
+                              <li key={subject}>{subject}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      {item.skills?.length > 0 && (
+                        <div className="timeline-section">
+                          <h4>Skills</h4>
+                          <ul>
+                            {item.skills.map((skill) => (
+                              <li key={skill}>{skill}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </details>
+                )}
+              </article>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

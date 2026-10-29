@@ -1,86 +1,119 @@
 import { useEffect, useRef, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import HomeIcon from "@mui/icons-material/Home";
+import ThemeToggle from "./ThemeToggle";
+
+const links = [
+  { id: "about", label: "About" },
+  { id: "projects", label: "Projects" },
+  { id: "timeline", label: "Journey" },
+  { id: "certifications", label: "Certifications" },
+  { id: "skills", label: "Skills" },
+  { id: "contact", label: "Contact" },
+];
 
 export default function NavBar() {
   const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("");
   const lastY = useRef(0);
+  const openRef = useRef(false);
 
-  // hide-on-scroll
+  useEffect(() => {
+    openRef.current = open;
+  }, [open]);
+
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
       const goingDown = y > lastY.current;
-      setHidden(goingDown && y > 100);
+      setScrolled(y > 12);
+      setHidden(goingDown && y > 140 && !openRef.current);
       lastY.current = y;
     };
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // close menu on Escape key
   useEffect(() => {
-    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    const onKey = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  const links = [
-    { id: "about", label: "About" },
-    { id: "projects", label: "Projects" },
-    { id: "skills", label: "Skills" },
-    { id: "timeline", label: "Timeline" },
-    { id: "contact", label: "Contact" },
-  ];
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
-  const closeAndScroll = () => setOpen(false);
+  useEffect(() => {
+    const sections = ["hero", ...links.map((link) => link.id)]
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          setActive(entry.target.id === "hero" ? "" : entry.target.id);
+        });
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0.01 }
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
-      {/* Backdrop for mobile drawer */}
       <div
         className={`nav-backdrop ${open ? "active" : ""}`}
         onClick={() => setOpen(false)}
-      ></div>
-
-      <div
-        className={`navbar ${hidden ? "navbar--hidden" : "navbar--visible"}`}
+      />
+      <header
+        className={`site-nav ${hidden ? "is-hidden" : ""} ${scrolled || open ? "is-scrolled" : ""} ${open ? "is-open" : ""}`}
       >
-        <div className="navbar-inner glass card-glass d-flex align-items-center justify-content-between">
-          {/* Home */}
-          <a href="#" className="nav-brand">
-            <HomeIcon fontSize="large" />
-          </a>
-
-          {/* Hamburger (mobile only) */}
-          <button
-            className="nav-toggle"
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            aria-controls="primary-navigation"
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? <CloseIcon /> : <MenuIcon />}
-          </button>
-
-          {/* Navigation Links */}
+        <div className="site-nav__inner container">
           <ul
             id="primary-navigation"
-            className={`nav nav-list ${open ? "is-open" : ""}`}
-            onClick={closeAndScroll}
+            className={`site-nav__list ${open ? "is-open" : ""}`}
           >
-            {links.map((l) => (
-              <li className="nav-item" key={l.id}>
-                <a className="nav-link" href={`#${l.id}`}>
-                  {l.label}
+            {links.map((link) => (
+              <li key={link.id}>
+                <a
+                  className={`site-nav__link ${active === link.id ? "is-active" : ""}`}
+                  href={`#${link.id}`}
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
                 </a>
               </li>
             ))}
           </ul>
+
+          <div className="site-nav__actions">
+            <ThemeToggle />
+            <button
+              type="button"
+              className="nav-toggle"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              aria-controls="primary-navigation"
+              onClick={() => {
+                setHidden(false);
+                setOpen((value) => !value);
+              }}
+            >
+              {open ? <CloseIcon /> : <MenuIcon />}
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
     </>
   );
 }

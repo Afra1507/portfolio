@@ -1,22 +1,59 @@
-export const timeline=[
+export const timeline = [
   {
-    "id": "t-intern-2025",
-    "year": "Oct 2025 – Present",
-    "title": "Software Engineering Intern — Quantum Tunnel Design PVT Ltd",
-    "location": "Colombo, Sri Lanka",
-    "description": "Currently working part-time as a Software Engineering Intern. Focused on frontend development and integration tasks. Contributing to the design and development of user interfaces using React, HTML, and CSS. Implementing features such as EmailJS integration for automated email functionality, while collaborating with the team to deploy and manage project files via FileZilla. Just started getting familiar with the codebase, tools, and workflow, and beginning to work on frontend tasks using React and learning how the team builds and maintains UI components.",
-    "skills": ["React","JavaScript","HTML & CSS","EmailJS","FileZilla","Git","Frontend Development"]
-  }
-  ,
+    id: "t-virtusa-2026",
+    year: "Aug 2026 – Present",
+    title: "Dev & DevOps Intern — Virtusa PVT Ltd",
+    location: "Colombo, Sri Lanka",
+    description:
+      "Working as a Dev & DevOps intern. Learning monitoring and cloud tooling, including Splunk, AWS, Dynatrace, and Zabbix.",
+    skills: ["Splunk", "AWS", "Dynatrace", "Zabbix", "DevOps"],
+  },
+  {
+    id: "t-intern-2025",
+    year: "Oct 2025 – Aug 2026",
+    title: "Software Engineering Intern — Quantum Tunnel Design PVT Ltd",
+    location: "Colombo, Sri Lanka",
+    description:
+      "Part-time software engineering intern focused on frontend development. Built interfaces with React, HTML, and CSS, added EmailJS for email, and helped deploy project files with FileZilla.",
+    skills: [
+      "React",
+      "JavaScript",
+      "HTML & CSS",
+      "EmailJS",
+      "FileZilla",
+      "Git",
+      "Frontend Development",
+    ],
+  },
   {
     id: "t-uni-2023",
-    year: "2023 – Present",
+    year: "2023 – Present · 4th year",
     title: "BSc (Hons) in Computer Science — University of Sri Jayewardenepura",
     location: "Nugegoda, Sri Lanka",
     description:
-      "Undergraduate studies focusing on data structures, web technologies, and software engineering practices.",
-    subjects: ["Data Structures & Algorithms","Service Oriented Computing","Software Engineering","Database Systems","Web Technologies","Operating Systems","OOP","Machine Learning"],
-    skills: ["Java","React","Node.js","MySQL","Docker","Git","JavaScript","HTML & CSS","Jenkins","Kubernetes"],
+      "Fourth year of undergraduate studies, covering data structures, web technologies, and software engineering.",
+    subjects: [
+      "Data Structures & Algorithms",
+      "Service Oriented Computing",
+      "Software Engineering",
+      "Database Systems",
+      "Web Technologies",
+      "Operating Systems",
+      "OOP",
+      "Machine Learning",
+    ],
+    skills: [
+      "Java",
+      "React",
+      "Node.js",
+      "MySQL",
+      "Docker",
+      "Git",
+      "JavaScript",
+      "HTML & CSS",
+      "Jenkins",
+      "Kubernetes",
+    ],
   },
   {
     id: "t-hlc-secondary",
@@ -28,7 +65,7 @@ export const timeline=[
     stream: "Physical Science Stream",
     description:
       "Completed secondary education with strong performance in mathematics and science subjects, providing foundation for computer science studies.",
-    subjects: ["Combined Mathematics","Physics","Chemistry"],
-    skills: ["Analytical Thinking","Problem Solving","Mathematics"],
+    subjects: ["Combined Mathematics", "Physics", "Chemistry"],
+    skills: ["Analytical Thinking", "Problem Solving", "Mathematics"],
   },
 ];

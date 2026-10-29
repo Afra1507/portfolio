@@ -7,18 +7,13 @@ export default function ThemeToggle() {
   const { dark, setDark } = useTheme();
   return (
     <button
-      className={`theme-toggle ${dark ? "dark" : "light"}`}
+      type="button"
+      className="icon-btn theme-toggle"
       onClick={() => setDark((v) => !v)}
-      aria-label="Toggle theme"
-      title={dark ? "Switch to Light" : "Switch to Dark"}
+      aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
+      title={dark ? "Switch to light mode" : "Switch to dark mode"}
     >
-      <span className="toggle-thumb">
-        {dark ? (
-          <LightModeIcon fontSize="small" />
-        ) : (
-          <DarkModeIcon fontSize="small" />
-        )}
-      </span>
+      {dark ? <LightModeIcon fontSize="small" /> : <DarkModeIcon fontSize="small" />}
     </button>
   );
 }
